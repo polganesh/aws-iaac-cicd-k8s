@@ -7,10 +7,16 @@ module "vpc" {
   region                  = "eu-central-1"
   region_id               = "euc1"
   az_list                 = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
+  # for creating vpc module it should be same vpc_seq_id == seq_id
   vpc_seq_id              = "001"
   seq_id                  = "001"
   environment             = "dev"
   cost_centre             = "tech"
+  # build date  indicates last time this config changed.
+  # it is just used for auditing purpose.
+  # no other significance.
+  # it is also used in tagging
   build_date              = "19-12-2021"
+  # version id indicates sequence number how many times this vpc changed.used just for tagging. no other significance
   version_id              = "001"
 }
