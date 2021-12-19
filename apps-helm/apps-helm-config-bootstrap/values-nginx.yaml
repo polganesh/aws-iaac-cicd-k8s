@@ -1,0 +1,8 @@
+#helm upgrade --install  --namespace kube-system nginx ingress-nginx -f values-nginx.yaml
+# helm install aws-load-balancer-controller aws-load-balancer-controller -n kube-system
+controller:
+  service:
+    type: NodePort
+defaultBackend:
+  service:
+    type: NodePort

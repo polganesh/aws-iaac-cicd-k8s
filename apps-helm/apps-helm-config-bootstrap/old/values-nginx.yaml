@@ -1,0 +1,7 @@
+#helm upgrade --install  --namespace ingress nginx nginx-ingress -f values-nginx.yaml
+controller:
+  service:
+    type: NodePort
+defaultBackend:
+  service:
+    type: NodePort 
