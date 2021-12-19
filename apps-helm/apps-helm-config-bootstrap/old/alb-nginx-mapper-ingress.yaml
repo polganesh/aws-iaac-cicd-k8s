@@ -1,0 +1,31 @@
+#kubectl apply -f alb-nginx-mapper-ingress.yaml 
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "myalb"
+  labels:
+    app: "myalbapp"
+  annotations:
+    # trigger the alb-ingress-controller
+    kubernetes.io/ingress.class: "alb"
+    # set ALB parameters
+    alb.ingress.kubernetes.io/scheme: "internet-facing"
+    alb.ingress.kubernetes.io/target-type: "instance"
+    #for security we are not allowing access to everyone
+    #alb.ingress.kubernetes.io/inbound-cidrs: 185.125.224.20/32,212.86.32.0/19,62.178.175.89/32
+    #public subnet id in which ALB needs to be created
+    alb.ingress.kubernetes.io/subnets: subnet-08a2019d76cf767ae,subnet-0f43cd9bf24f06961,subnet-07a587cc1b82530b2
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:373612170290:certificate/0e1520d5-1ebf-49cf-b4f7-6325cab280d3
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+    # allow 404s on the health check
+    alb.ingress.kubernetes.io/healthcheck-path: "/"
+    alb.ingress.kubernetes.io/success-codes: "200,404"
+spec:
+  # forward all requests to nginx-ingress-controller
+  rules:
+  - http:
+      paths:
+      - path: "/*"
+        backend:
+          serviceName: "nginx-nginx-ingress-controller"
+          servicePort: 80
