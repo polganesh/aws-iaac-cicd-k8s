@@ -9,15 +9,26 @@ spec:
   # if we dont specify then project: default
   project: default
   source:
-# ideal for git repo
-    repoURL: https://github.com/polganesh/aws-iaac-cicd-k8s.git
-    targetRevision: argo-cd-helm-branch-test #branch
     path: apps-helm/apps-helm-config/my-initial-app/
+    repoURL: https://github.com/polganesh/aws-iaac-cicd-k8s.git
+    targetRevision: dev
+    helm:
+      version: v3
+      releaseName: my-app
+      values: |
+        image:
+          tag: latest
+        ingress:
+          host: nginx.dev.polganesh.net
+# ideal for git repo
+#    repoURL: https://github.com/polganesh/aws-iaac-cicd-k8s.git
+#    targetRevision: continous-deployment-argo-cd-helm-branch-test #branch
+#    path: apps-helm/apps-helm-config/my-initial-app/
 
 # for helm repo on git
 #     chart: my-app
 #     repoURL: https://github.com/polganesh/aws-iaac-cicd-k8s.git/apps-helm/apps-helm-config/my-initial-app
-#     targetRevision: argo-cd-helm-branch-test #branch need to check how it works on branch
+#     targetRevision: continous-deployment-argo-cd-helm-branch-test #branch need to check how it works on branch
 #     #path: apps-helm/apps-helm-config/my-initial-app/
 #     # targetRevision: 2021.12.29.1
 #     helm:
