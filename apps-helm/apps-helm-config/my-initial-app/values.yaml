@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 # helm install my-initial-app-nginx my-initial-app
-replicaCount: 1
+replicaCount: 4
 
 image:
   repository: nginx
