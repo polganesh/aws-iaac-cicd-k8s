@@ -22,7 +22,7 @@ spec:
               io:
                 scheme: "internet-facing"
                 target-type: "instance"
-                inbound-cidrs: "[0.0.0.0/0]"
+                inbound-cidrs: "0.0.0.0/0"
                 subnets: "subnet-07a587cc1b82530b2,subnet-0f43cd9bf24f06961,subnet-08a2019d76cf767ae"
                 certificate-arn: "arn:aws:acm:eu-central-1:373612170290:certificate/0e1520d5-1ebf-49cf-b4f7-6325cab280d3,arn:aws:acm:eu-central-1:373612170290:certificate/b466dfdc-1a03-49b7-84c4-41cde60c4e78,arn:aws:acm:eu-central-1:373612170290:certificate/3fd45be9-cf66-4af6-8f4d-30941e55fbfa,arn:aws:acm:eu-central-1:373612170290:certificate/89ad680b-f257-4fc4-b95b-91473a42d652"
                 listen-ports: '[{"HTTPS": 443}]'
