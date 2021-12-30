@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-app
+  name: my-app-test
   namespace: argocd
 spec:
   # every app belongs to single project
@@ -11,15 +11,16 @@ spec:
   source:
     path: apps-helm/apps-helm-config/my-initial-app/
     repoURL: https://github.com/polganesh/aws-iaac-cicd-k8s.git
-    targetRevision: dev
+    targetRevision: test
     helm:
       version: v3
-      releaseName: my-app
+      releaseName: my-app-test
       values: |
+        replicaCount: 1
         image:
           tag: latest
         ingress:
-          host: nginx.dev.polganesh.net
+          host: testngnx.dev.polganesh.net
 # ideal for git repo
 #    repoURL: https://github.com/polganesh/aws-iaac-cicd-k8s.git
 #    targetRevision: continous-deployment-argo-cd-helm-branch-test #branch
@@ -36,7 +37,7 @@ spec:
 #      releaseName: my-app
   destination:
     server: https://kubernetes.default.svc # we are deploying it to same k8s cluster where argo cd installed my-initial-app-nginx
-    namespace: apps
+    namespace: apps-test
 
   syncPolicy:
     syncOptions:
