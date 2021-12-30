@@ -2,41 +2,29 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-app
+  name: nginx
   namespace: argocd
 spec:
   # every app belongs to single project
   # if we dont specify then project: default
   project: default
   source:
-    path: apps-helm/apps-helm-config/my-initial-app/
+    path: apps-helm/apps-k8s-helm-config-bootstrap/old/nginx-ingress
     repoURL: https://github.com/polganesh/aws-iaac-cicd-k8s.git
-    targetRevision: dev
+    targetRevision: main
     helm:
       version: v3
-      releaseName: my-app
+      releaseName: nginx
       values: |
-        image:
-          tag: latest
-        ingress:
-          host: nginx.dev.polganesh.net
-# ideal for git repo
-#    repoURL: https://github.com/polganesh/aws-iaac-cicd-k8s.git
-#    targetRevision: continous-deployment-argo-cd-helm-branch-test #branch
-#    path: apps-helm/apps-helm-config/my-initial-app/
-
-# for helm repo on git
-#     chart: my-app
-#     repoURL: https://github.com/polganesh/aws-iaac-cicd-k8s.git/apps-helm/apps-helm-config/my-initial-app
-#     targetRevision: continous-deployment-argo-cd-helm-branch-test #branch need to check how it works on branch
-#     #path: apps-helm/apps-helm-config/my-initial-app/
-#     # targetRevision: 2021.12.29.1
-#     helm:
-#      version: v3
-#      releaseName: my-app
+        controller:
+          service:
+            type: NodePort
+        defaultBackend:
+          service:
+            type: NodePort
   destination:
     server: https://kubernetes.default.svc # we are deploying it to same k8s cluster where argo cd installed my-initial-app-nginx
-    namespace: apps
+    namespace: ingress
 
   syncPolicy:
     syncOptions:

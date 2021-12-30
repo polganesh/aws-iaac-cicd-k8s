@@ -1,0 +1,46 @@
+# https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-alb-map
+  namespace: argocd
+spec:
+  # every app belongs to single project
+  # if we dont specify then project: default
+  project: default
+  source:
+    path: apps-helm/apps-k8s-helm-config-bootstrap/old/nginx-alb-map
+    repoURL: https://github.com/polganesh/aws-iaac-cicd-k8s.git
+    targetRevision: main
+    helm:
+      version: v3
+      releaseName: nginx-alb-map
+      values: |
+        alb:
+          ingress:
+            kubernetes:
+              io:
+                scheme: "internet-facing"
+                target-type: "instance"
+                inbound-cidrs: "[0.0.0.0/0]"
+                subnets: "subnet-07a587cc1b82530b2,subnet-0f43cd9bf24f06961,subnet-08a2019d76cf767ae"
+                certificate-arn: "arn:aws:acm:eu-central-1:373612170290:certificate/0e1520d5-1ebf-49cf-b4f7-6325cab280d3,arn:aws:acm:eu-central-1:373612170290:certificate/b466dfdc-1a03-49b7-84c4-41cde60c4e78,arn:aws:acm:eu-central-1:373612170290:certificate/3fd45be9-cf66-4af6-8f4d-30941e55fbfa,arn:aws:acm:eu-central-1:373612170290:certificate/89ad680b-f257-4fc4-b95b-91473a42d652"
+                listen-ports: '[{"HTTPS": 443}]'
+                healthcheck-path: "/"
+                success-codes: "200,404"
+  destination:
+    server: https://kubernetes.default.svc # we are deploying it to same k8s cluster where argo cd installed my-initial-app-nginx
+    namespace: ingress
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true # ensure that if namespace is not created then create namespace
+# by default argo cd is not synch with git repo. in order to automate this synch we need to perform following config
+# it will poll changes every 3 minutes not immediately. if we dont want delay then we can configure webhook.
+# in other words it will do following. if any person try to update/delte app from command line it will rollback his changes and try to keep config from git only
+    automated:
+      # self heal will ensure that any changes made manually by kubectl will be overridden by one defined in git repo.
+      # it ensure that git is single source of truth
+      selfHeal: true
+      # help us to synch if any k8s resource (updated/deleted) then argo cd will synch
+      prune: true
