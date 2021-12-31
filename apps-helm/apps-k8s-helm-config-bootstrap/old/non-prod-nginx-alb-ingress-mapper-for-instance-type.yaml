@@ -33,7 +33,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: nginx-ingress-nginx-controller # please note this name must match with nginx service name
+            name: nginx-nginx-ingress-controller # please note this name must match with nginx service name
             port:
               number: 80
 #spec:
