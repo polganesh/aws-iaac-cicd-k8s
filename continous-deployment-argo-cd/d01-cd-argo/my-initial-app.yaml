@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-app
+  name: my-app-d01
   namespace: argocd
 spec:
   # every app belongs to single project
@@ -14,8 +14,9 @@ spec:
     targetRevision: d01  #git branch
     helm:
       version: v3  # helm version
-      releaseName: my-app  #name of release
+      releaseName: my-app-d01  #name of release
       values: |
+        replicaCount: 1
         image:
           tag: latest
         ingress:
