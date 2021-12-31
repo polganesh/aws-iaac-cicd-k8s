@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx-ingress
+  name: nginx
   namespace: argocd
 spec:
   # every app belongs to single project
@@ -14,7 +14,7 @@ spec:
     targetRevision: main
     helm:
       version: v3
-      releaseName: nginx-ingress
+      releaseName: nginx
       values: |
         controller:
           service:
