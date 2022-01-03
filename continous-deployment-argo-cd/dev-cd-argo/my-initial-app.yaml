@@ -18,7 +18,7 @@ spec:
       values: |
         replicaCount: 10
         image:
-          tag: 1.21.5 
+          tag: 1.21.4 
         ingress:
           enabled: true
           annotations:

@@ -5,7 +5,7 @@ data "aws_kms_key" "n-core-kms" {
 
 resource "aws_ecr_repository" "tnet-ecr" {
   name = "ecr-euc1-n-tnet-001"
-  image_tag_mutability = "MUTABLE"
+  image_tag_mutability = "IMMUTABLE"
   image_scanning_configuration {
     scan_on_push = true #Image Scanning for Amazon ECR is available at no additional charge,
   }
@@ -20,6 +20,6 @@ resource "aws_ecr_repository" "tnet-ecr" {
   # it provide added security https://www.youtube.com/watch?v=Q-76zbnJ_7c
   encryption_configuration {
     encryption_type = "KMS"
-    kms_key = data.aws_kms_key.n-core-kms
+    kms_key = data.aws_kms_key.n-core-kms.arn
   }
 }
