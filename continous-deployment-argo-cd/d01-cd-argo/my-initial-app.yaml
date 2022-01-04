@@ -16,7 +16,7 @@ spec:
       version: v3  # helm version
       releaseName: my-app-d01  #name of release
       values: |
-        replicaCount: 1
+        replicaCount: 5
         image:
           tag: latest
         ingress:
