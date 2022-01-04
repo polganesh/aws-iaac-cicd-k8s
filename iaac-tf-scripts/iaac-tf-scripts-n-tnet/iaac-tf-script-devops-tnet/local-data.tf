@@ -5,19 +5,19 @@ locals {
   vpc_seq_id                = "001"
   seq_id                    = "001"
   environment               = "dev"
-  app_service               = "tnet"
-  build_date                = "21-12-2021"
+  app_service               = "devops"
+  build_date                = "04-01-2022"
   eks_version               = "1.19"
   fargate_subnet_ids_string = join(",", data.aws_subnet_ids.private_app_subnets.ids)
   fargate_subnet_ids_list   = split(",", local.fargate_subnet_ids_string)
 
   spot-node-group = {
     node_group_name                          = "spot-example"
-    scaling_config_desired_capacity          = 3
+    scaling_config_desired_capacity          = 1
     scaling_config_max_capacity              = 5
-    scaling_config_min_capacity              = 3
+    scaling_config_min_capacity              = 1
     update_config_max_unavailable_percentage = 50
-    instance_types                           = ["t3a.small", "t3a.medium", "t3a.large", "m5.large"]
+    instance_types                           = ["t3a.medium", "t3a.large", "m5.large"]
     capacity_type                            = "SPOT"
   }
   on-demand-node-group = {
