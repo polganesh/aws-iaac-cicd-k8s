@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: d01-app
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: d01
+            url: https://DF4D498A23FE049D1BFA779AE37501AC.gr7.eu-central-1.eks.amazonaws.com
+#          - cluster: local-dev
+#            url: https://2.4.6.8
+#          - cluster: finance-preprod
+#            url: https://9.8.7.6
+  template:
+    # This is a template Argo CD Application, but with support for parameter substitution.
+    metadata:
+      name: '{{name}}-app-set-example'
+    spec:
+      project: "default"
+      source:
+        repoURL: https://github.com/argoproj/argocd-example-apps/
+        targetRevision: HEAD
+        path: guestbook
+      destination:
+        server: '{{server}}'
+        namespace: guestbook

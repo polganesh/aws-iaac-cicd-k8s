@@ -11,14 +11,12 @@ spec:
   source:
     path: apps-helm/apps-helm-config/sonarqube/ # location in git repo
     repoURL: https://github.com/polganesh/aws-iaac-cicd-k8s.git
-    targetRevision: d01  #git branch
+    targetRevision: main  #git branch
     helm:
       version: v3  # helm version
       releaseName: sonarqube-d01-remote  #name of release
       values: |
         replicaCount: 1
-#        image:
-#          tag: latest
         ingress:
           enabled: true
           annotations:

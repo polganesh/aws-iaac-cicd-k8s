@@ -1,0 +1,31 @@
+annotations:
+  artifacthub.io/changes: |
+    - kind: changed
+      description: "updated SonarQube to 9.2.4"
+  artifacthub.io/containsSecurityUpdates: "false"
+  artifacthub.io/images: |
+    - name: sonarqube
+      image: sonarqube:9.2.4-community
+  artifacthub.io/links: |
+    - name: support
+      url: https://community.sonarsource.com/
+apiVersion: v1
+appVersion: 9.2.4
+description: SonarQube offers Code Quality and Code Security analysis for up to 27
+  languages. Find Bugs, Vulnerabilities, Security Hotspots and Code Smells throughout
+  your workflow.
+home: https://www.sonarqube.org/
+icon: https://www.sonarqube.org/assets/logo-31ad3115b1b4b120f3d1efd63e6b13ac9f1f89437f0cf6881cc4d8b5603a52b4.svg
+keywords:
+- coverage
+- security
+- code
+- quality
+kubeVersion: '>= 1.19.0-0'
+maintainers:
+- email: tobias.trabelsi+helm@sonarsource.com
+  name: tobias-trabelsi-sonarsource
+name: sonarqube
+sources:
+- https://github.com/SonarSource/docker-sonarqube
+version: 1.2.5+179
