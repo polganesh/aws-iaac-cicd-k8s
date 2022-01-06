@@ -13,11 +13,11 @@ locals {
 
   spot-node-group = {
     node_group_name                          = "spot-example"
-    scaling_config_desired_capacity          = 3
+    scaling_config_desired_capacity          = 2
     scaling_config_max_capacity              = 5
-    scaling_config_min_capacity              = 3
+    scaling_config_min_capacity              = 2
     update_config_max_unavailable_percentage = 50
-    instance_types                           = ["t3a.small", "t3a.medium", "t3a.large", "m5.large"]
+    instance_types                           = [ "t3a.medium", "t3a.large", "m5.large"]
     capacity_type                            = "SPOT"
   }
   on-demand-node-group = {

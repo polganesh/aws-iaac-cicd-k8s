@@ -4,7 +4,7 @@ data "aws_kms_key" "n-core-kms" {
 }
 
 resource "aws_ecr_repository" "tnet-ecr" {
-  name = "ecr-euc1-n-tnet-001"
+  name = "poc"
   image_tag_mutability = "IMMUTABLE"
   image_scanning_configuration {
     scan_on_push = true #Image Scanning for Amazon ECR is available at no additional charge,
