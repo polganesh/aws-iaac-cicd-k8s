@@ -9,9 +9,10 @@ spec:
   # if we dont specify then project: default
   project: default
   source:
-    path: apps-helm/apps-k8s-helm-config-bootstrap/old/nginx-ingress
-    repoURL: https://github.com/polganesh/aws-iaac-cicd-k8s.git
+    path: apps-helm/apps-k8s-helm-config-bootstrap/old/nginx-ingress # location of helm chart in repoURL git repo.
+    repoURL: https://github.com/polganesh/aws-iaac-cicd-k8s.git # since it is public repo it works on https otherwise we might need to provide password,token, ssh key
     targetRevision: main # branch from which helm code to pick
+    # please note also how helm values are overriding
     helm:
       version: v3
       releaseName: nginx
