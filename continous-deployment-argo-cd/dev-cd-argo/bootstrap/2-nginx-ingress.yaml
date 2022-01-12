@@ -11,7 +11,7 @@ spec:
   source:
     path: apps-helm/apps-k8s-helm-config-bootstrap/old/nginx-ingress
     repoURL: https://github.com/polganesh/aws-iaac-cicd-k8s.git
-    targetRevision: main
+    targetRevision: main # branch from which helm code to pick
     helm:
       version: v3
       releaseName: nginx
@@ -23,9 +23,9 @@ spec:
           service:
             type: NodePort
   destination:
-    server: https://kubernetes.default.svc # we are deploying it to same k8s cluster where argo cd installed my-initial-app-nginx
+    # it is deploying application to cluster named as eks-euc1-dev-tech-vpc001-tnet-001 in argoCd in ingress namespace
+    name : eks-euc1-dev-tech-vpc001-tnet-001
     namespace: ingress
-
   syncPolicy:
     syncOptions:
     - CreateNamespace=true # ensure that if namespace is not created then create namespace
