@@ -29,7 +29,7 @@ spec:
                 - path: /
                   pathType: ImplementationSpecific
   destination:
-    server: https://kubernetes.default.svc # we are deploying it to same k8s cluster where argo cd installed my-initial-app-nginx
+    name: eks-euc1-dev-tech-vpc001-tnet-001
     namespace: dev
 #  syncPolicy:
 #    syncOptions:
