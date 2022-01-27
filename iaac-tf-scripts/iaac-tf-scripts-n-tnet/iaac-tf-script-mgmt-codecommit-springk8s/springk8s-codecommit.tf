@@ -2,7 +2,7 @@ resource "aws_codecommit_repository" "repo" {
   repository_name = "springk8s"
   description     = "This code commit git repo mirrored with on premises bitbucket/github/gitlab repo"
   lifecycle {
-     prevent_destroy = true
+    prevent_destroy = true
   }
 }
 
