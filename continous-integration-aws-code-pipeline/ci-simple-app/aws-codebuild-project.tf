@@ -38,6 +38,12 @@ resource "aws_codebuild_project" "demo" {
       name  = "APP_NAME"
       value=local.app-name
     }
+
+    environment_variable {
+      name  = "BRANCH_NAME"
+      value=local.branch-name
+    }
+
   }
 
   source {
