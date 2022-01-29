@@ -11,6 +11,7 @@ locals {
   build-timeout   = 60 # default is 60 , min 5 minutes ,max 480 minutes (8 hours)
   compute_type    = "BUILD_GENERAL1_SMALL"
   image           = "aws/codebuild/standard:3.0"
+  #image           = "aws/codebuild/standard:5.0"
   type            = "LINUX_CONTAINER"
   privileged_mode = true
 
